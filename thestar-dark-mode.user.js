@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Toronto Star Dark Mode
 // @namespace    https://github.com/gtalusan/tampermonkey-torstar-darkmode
-// @version      1.1.0
+// @version      1.2.0
 // @description  Dark mode for www.thestar.com — the Toronto Star, branded on-site as "The Star" — and Torstar's sister papers. Converts the site's bright white layout to a dark theme.
 // @author       george
 // @match        *://www.thestar.com/*
@@ -935,16 +935,14 @@ html.tstar-dark #vf-comments {
     background-color: transparent !important;
 }
 
-/* Mobile ad placeholders: the "ARTICLE CONTINUES BELOW" video runway and the
-   "ADVERTISEMENT" bigbox slots render as big white blocks in dark mode, so
-   suppress them on phones. */
-@media (max-width: 767px) {
-    html.tstar-dark .adLabelWrapperManual,
-    html.tstar-dark .label-article-continues,
-    html.tstar-dark .tnt-ads-container,
-    html.tstar-dark .tnt-ads.dfp-ad {
-        display: none !important;
-    }
+/* Ad placeholders: the "ARTICLE CONTINUES BELOW" video runway and the
+   "ADVERTISEMENT" slots render as big white blocks in dark mode, so
+   suppress them at every width. */
+html.tstar-dark .adLabelWrapperManual,
+html.tstar-dark .label-article-continues,
+html.tstar-dark .tnt-ads-container,
+html.tstar-dark .tnt-ads.dfp-ad {
+    display: none !important;
 }
 `;
 
