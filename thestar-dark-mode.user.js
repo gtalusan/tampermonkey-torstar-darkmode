@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Toronto Star Dark Mode
 // @namespace    https://github.com/gtalusan/tampermonkey-torstar-darkmode
-// @version      1.2.0
+// @version      1.2.1
 // @description  Dark mode for www.thestar.com — the Toronto Star, branded on-site as "The Star" — and Torstar's sister papers. Converts the site's bright white layout to a dark theme.
 // @author       george
 // @match        *://www.thestar.com/*
@@ -942,6 +942,15 @@ html.tstar-dark .adLabelWrapperManual,
 html.tstar-dark .label-article-continues,
 html.tstar-dark .tnt-ads-container,
 html.tstar-dark .tnt-ads.dfp-ad {
+    display: none !important;
+}
+
+/* Sticky mobile ads: a JS scroll-follower (.stickyMobileAd gets a .sticky
+   class and position:fixed while scrolling) and the bottom anchor shell
+   (#sticky-anchor, with its "ADVERTISEMENT" pseudo-label) hover over the
+   page as white boxes even after the inner ad is hidden — remove them. */
+html.tstar-dark .stickyMobileAd,
+html.tstar-dark #sticky-anchor {
     display: none !important;
 }
 `;

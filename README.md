@@ -20,7 +20,7 @@ The Toronto Star's site runs on the TownNews/BLOX platform, which defines its co
 2. **Patches hard-coded components** — Bootstrap panels/dropdowns/forms/modals, homepage cards, the "New from the Star" promo box, `.tnt-has-block-bg` blocks ("More News", "Top Trending", …), related-content boxes, bylines, captions, the offcanvas mobile drawer.
 3. **Wins cascade fights** — the site ships high-specificity `!important` white rules for the sticky header (`#site-container #site-navbar-container`, the `.affix` state); every selector in the script is written to beat its twin, and the script keeps its `<style>` element last in `<head>` (via a `MutationObserver`) so ties break in its favour.
 4. **Inverts the masthead logo** (black-on-transparent PNG) and paints `<html>` dark immediately at `document-start` to avoid a white flash.
-5. **Suppresses ad placeholders** — the "ARTICLE CONTINUES BELOW" video runway and "ADVERTISEMENT" slots render as big white blocks in dark mode, so they're hidden everywhere (mobile and desktop leaderboards alike).
+5. **Suppresses ad placeholders** — the "ARTICLE CONTINUES BELOW" video runway, "ADVERTISEMENT" slots, and the sticky mobile scroll-follower/footer-anchor shells render as big white blocks in dark mode, so they're hidden everywhere.
 
 The site's light design tokens are in the first `html.tstar-dark { … }` block — tweak the palette there.
 
