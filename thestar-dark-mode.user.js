@@ -1,13 +1,59 @@
 // ==UserScript==
 // @name         Toronto Star Dark Mode
 // @namespace    https://github.com/gtalusan/tampermonkey-torstar-darkmode
-// @version      1.0.0
-// @description  Dark mode for www.thestar.com — the Toronto Star, branded on-site as "The Star". Converts the site's bright white layout to a dark theme.
+// @version      1.1.0
+// @description  Dark mode for www.thestar.com — the Toronto Star, branded on-site as "The Star" — and Torstar's sister papers. Converts the site's bright white layout to a dark theme.
 // @author       george
-// @match        https://www.thestar.com/*
-// @match        https://thestar.com/*
-// @match        http://www.thestar.com/*
-// @match        http://thestar.com/*
+// @match        *://www.thestar.com/*
+// @match        *://thestar.com/*
+// @match        *://www.thespec.com/*
+// @match        *://thespec.com/*
+// @match        *://www.toronto.com/*
+// @match        *://toronto.com/*
+// @match        *://www.mississauga.com/*
+// @match        *://mississauga.com/*
+// @match        *://www.bramptonguardian.com/*
+// @match        *://bramptonguardian.com/*
+// @match        *://www.northumberlandnews.com/*
+// @match        *://northumberlandnews.com/*
+// @match        *://www.niagarafallsreview.ca/*
+// @match        *://niagarafallsreview.ca/*
+// @match        *://www.niagarathisweek.com/*
+// @match        *://niagarathisweek.com/*
+// @match        *://www.stcatharinesstandard.ca/*
+// @match        *://stcatharinesstandard.ca/*
+// @match        *://www.thoroldtoday.ca/*
+// @match        *://thoroldtoday.ca/*
+// @match        *://www.wellandtribune.ca/*
+// @match        *://wellandtribune.ca/*
+// @match        *://www.durhamregion.com/*
+// @match        *://durhamregion.com/*
+// @match        *://www.yorkregion.com/*
+// @match        *://yorkregion.com/*
+// @match        *://www.orangeville.com/*
+// @match        *://orangeville.com/*
+// @match        *://www.caledonenterprise.com/*
+// @match        *://caledonenterprise.com/*
+// @match        *://www.guelphmercury.com/*
+// @match        *://guelphmercury.com/*
+// @match        *://www.therecord.com/*
+// @match        *://therecord.com/*
+// @match        *://www.simcoe.com/*
+// @match        *://simcoe.com/*
+// @match        *://www.muskokaregion.com/*
+// @match        *://muskokaregion.com/*
+// @match        *://www.parrysound.com/*
+// @match        *://parrysound.com/*
+// @match        *://www.thepeterboroughexaminer.com/*
+// @match        *://thepeterboroughexaminer.com/*
+// @match        *://www.insidehalton.com/*
+// @match        *://insidehalton.com/*
+// @match        *://www.insideottawavalley.com/*
+// @match        *://insideottawavalley.com/*
+// @match        *://www.cambridgetimes.ca/*
+// @match        *://cambridgetimes.ca/*
+// @match        *://www.newhamburgindependent.ca/*
+// @match        *://newhamburgindependent.ca/*
 // @noframes
 // @run-at       document-start
 // @grant        none
@@ -20,9 +66,10 @@
 // (1) overrides the design tokens, (2) patches the hard-coded components, and
 // (3) keeps its stylesheet last in <head> so it wins cascade ties.
 //
-// The same template runs on Torstar's sister papers (thespec.com,
-// toronto.com, niagarafallsreview.ca, ...). To enable this script there,
-// copy the @match lines above and change the domain.
+// The same template runs Torstar's sister papers (thespec.com, toronto.com,
+// niagarafallsreview.ca, ...), all of which are matched above. Some older
+// community-paper domains (flamboroughreview.com, sachem.ca, hamiltonnews.com)
+// now redirect to thespec.com, which is already covered.
 
 (function () {
     'use strict';
@@ -886,6 +933,18 @@ html.tstar-dark .dfp-ad {
 html.tstar-dark .viafoura,
 html.tstar-dark #vf-comments {
     background-color: transparent !important;
+}
+
+/* Mobile ad placeholders: the "ARTICLE CONTINUES BELOW" video runway and the
+   "ADVERTISEMENT" bigbox slots render as big white blocks in dark mode, so
+   suppress them on phones. */
+@media (max-width: 767px) {
+    html.tstar-dark .adLabelWrapperManual,
+    html.tstar-dark .label-article-continues,
+    html.tstar-dark .tnt-ads-container,
+    html.tstar-dark .tnt-ads.dfp-ad {
+        display: none !important;
+    }
 }
 `;
 

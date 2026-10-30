@@ -10,7 +10,7 @@ A Tampermonkey/Greasemonkey userscript that converts [www.thestar.com](https://w
    - Safari: [Userscripts](https://github.com/quoid/userscripts)
 2. Click the Tampermonkey icon → **Create a new script**, delete the template, paste in the contents of [`thestar-dark-mode.user.js`](thestar-dark-mode.user.js), and save. (Or drag the file into the Tampermonkey dashboard.)
 
-The script needs no special permissions (`@grant none`) and applies to `www.thestar.com` and `thestar.com`.
+The script needs no special permissions (`@grant none`) and applies to `www.thestar.com`/`thestar.com` plus Torstar's sister papers (see below).
 
 ## What it does
 
@@ -20,12 +20,28 @@ The Toronto Star's site runs on the TownNews/BLOX platform, which defines its co
 2. **Patches hard-coded components** — Bootstrap panels/dropdowns/forms/modals, homepage cards, the "New from the Star" promo box, `.tnt-has-block-bg` blocks ("More News", "Top Trending", …), related-content boxes, bylines, captions, the offcanvas mobile drawer.
 3. **Wins cascade fights** — the site ships high-specificity `!important` white rules for the sticky header (`#site-container #site-navbar-container`, the `.affix` state); every selector in the script is written to beat its twin, and the script keeps its `<style>` element last in `<head>` (via a `MutationObserver`) so ties break in its favour.
 4. **Inverts the masthead logo** (black-on-transparent PNG) and paints `<html>` dark immediately at `document-start` to avoid a white flash.
+5. **Suppresses mobile ad placeholders** — the "ARTICLE CONTINUES BELOW" video runway and "ADVERTISEMENT" slots render as big white blocks in dark mode, so they're hidden on phone-sized screens.
 
 The site's light design tokens are in the first `html.tstar-dark { … }` block — tweak the palette there.
 
-## Enabling sister papers
+## Sister papers
 
-The same BLOX template runs on Torstar's sister papers (`thespec.com`, `toronto.com`, `niagarafallsreview.ca`, …). Duplicate the `@match` lines in the header and change the domain; the rest of the script should just work.
+The same BLOX template runs Torstar's sister papers, and the script already matches all of them (verified live as of Oct 2026):
+
+| Group | Sites |
+|---|---|
+| The Star | thestar.com |
+| Hamilton | thespec.com (also the redirect target for flamboroughreview.com, sachem.ca, hamiltonnews.com) |
+| GTA | toronto.com, mississauga.com, bramptonguardian.com, insidehalton.com |
+| Durham/York | durhamregion.com, yorkregion.com |
+| Niagara | niagarafallsreview.ca, niagarathisweek.com, stcatharinesstandard.ca, thoroldtoday.ca, wellandtribune.ca |
+| Waterloo Region | therecord.com, guelphmercury.com, cambridgetimes.ca, newhamburgindependent.ca |
+| Simcoe/Muskoka | simcoe.com, muskokaregion.com, parrysound.com, orangeville.com, caledonenterprise.com |
+| Northumberland | northumberlandnews.com |
+| Peterborough | thepeterboroughexaminer.com (mykawartha.com redirects here) |
+| Ottawa Valley | insideottawavalley.com |
+
+To add or remove a site, edit the `@match` lines in the script header. Dead domains (dundasstarnews.com, ancasternews.com, stoneycreeknews.com, burlingtonpost.com) were verified offline and are not matched.
 
 ## Development notes
 
